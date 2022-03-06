@@ -1,0 +1,35 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="warehouse">
+            <h2><span jhiTranslate="carsShopApp.warehouse.detail.title">Warehouse</span> {{warehouse.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="carsShopApp.warehouse.name">Name</span></dt>
+                <dd>
+                    <span>{{warehouse.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="carsShopApp.warehouse.locationLat">Location Lat</span></dt>
+                <dd>
+                    <span>{{warehouse.locationLat}}</span>
+                </dd>
+                <dt><span jhiTranslate="carsShopApp.warehouse.locationLong">Location Long</span></dt>
+                <dd>
+                    <span>{{warehouse.locationLong}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/warehouse', warehouse.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

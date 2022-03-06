@@ -1,0 +1,5 @@
+entity Warehouse {
+    name String required minlength(1)
+    locationLat BigDecimal required
+    locationLong BigDecimal required
+}

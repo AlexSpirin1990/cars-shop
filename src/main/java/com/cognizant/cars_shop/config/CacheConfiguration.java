@@ -42,6 +42,7 @@ public class CacheConfiguration {
             createCache(cm, com.cognizant.cars_shop.domain.User.class.getName());
             createCache(cm, com.cognizant.cars_shop.domain.Authority.class.getName());
             createCache(cm, com.cognizant.cars_shop.domain.User.class.getName() + ".authorities");
+            createCache(cm, com.cognizant.cars_shop.domain.Warehouse.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
