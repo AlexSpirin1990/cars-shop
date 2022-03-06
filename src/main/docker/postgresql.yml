@@ -1,0 +1,11 @@
+version: '2'
+services:
+  cars_shop-postgresql:
+    image: postgres:11.6
+    # volumes:
+    #     - ~/volumes/jhipster/cars_shop/postgresql/:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=cars_shop
+      - POSTGRES_PASSWORD=
+    ports:
+      - 5432:5432
