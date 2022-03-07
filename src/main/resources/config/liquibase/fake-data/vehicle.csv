@@ -1,0 +1,13 @@
+id;make;model;year_model;price;licensed;date_added;location_id;warehouse_id
+1;Volkswagen;Jetta III;1995;12947.52;true;2018-09-18T11:46:30;1;1
+2;Chevrolet;Corvette;2004;20019.64;true;2018-01-27T11:46:30;1;1
+3;Ford;Expedition EL;2008;27323.42;false;2018-07-03T11:46:30;1;1
+4;Maserati;Coupe;2005;19957.71;false;2017-11-14T11:46:30;2;2
+5;Isuzu;Rodeo;1998;6303.99;true;2018-01-27T11:46:30;2;2
+6;Infiniti;I;2002;6910.16;false;2017-10-15T11:46:30;2;2
+7;Cadillac;Escalade;2005;7429.18;true;2018-09-26T11:46:30;3;3
+8;Porsche;Cayenne;2011;17066.31;true;2017-10-19T11:46:30;3;3
+9;Mercedes-Benz;SL-Class;2005;14066.06;false;2018-08-08T11:46:30;3;3
+10;Saab;900;1987;8771;false;2017-12-01T11:46:30;2;4
+11;Mazda;B-Series;1998;23407.59;false;2018-03-01T11:46:30;2;4
+12;GMC;Sierra 3500;2012;5869.23;true;2018-04-27T11:46:30;2;4

@@ -6,15 +6,14 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 
 /**
- * A Warehouse.
+ * A Location.
  */
 @Entity
-@Table(name = "warehouse")
+@Table(name = "location")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Warehouse implements Serializable {
+public class Location implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -27,14 +26,6 @@ public class Warehouse implements Serializable {
     @Size(min = 1)
     @Column(name = "name", nullable = false)
     private String name;
-
-    @NotNull
-    @Column(name = "location_lat", precision = 21, scale = 2, nullable = false)
-    private BigDecimal locationLat;
-
-    @NotNull
-    @Column(name = "location_long", precision = 21, scale = 2, nullable = false)
-    private BigDecimal locationLong;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -49,39 +40,13 @@ public class Warehouse implements Serializable {
         return name;
     }
 
-    public Warehouse name(String name) {
+    public Location name(String name) {
         this.name = name;
         return this;
     }
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public BigDecimal getLocationLat() {
-        return locationLat;
-    }
-
-    public Warehouse locationLat(BigDecimal locationLat) {
-        this.locationLat = locationLat;
-        return this;
-    }
-
-    public void setLocationLat(BigDecimal locationLat) {
-        this.locationLat = locationLat;
-    }
-
-    public BigDecimal getLocationLong() {
-        return locationLong;
-    }
-
-    public Warehouse locationLong(BigDecimal locationLong) {
-        this.locationLong = locationLong;
-        return this;
-    }
-
-    public void setLocationLong(BigDecimal locationLong) {
-        this.locationLong = locationLong;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -90,10 +55,10 @@ public class Warehouse implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Warehouse)) {
+        if (!(o instanceof Location)) {
             return false;
         }
-        return id != null && id.equals(((Warehouse) o).id);
+        return id != null && id.equals(((Location) o).id);
     }
 
     @Override
@@ -103,11 +68,9 @@ public class Warehouse implements Serializable {
 
     @Override
     public String toString() {
-        return "Warehouse{" +
+        return "Location{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", locationLat=" + getLocationLat() +
-            ", locationLong=" + getLocationLong() +
             "}";
     }
 }

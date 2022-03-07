@@ -1,0 +1,59 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="vehicle">
+            <h2><span jhiTranslate="carsShopApp.vehicle.detail.title">Vehicle</span> {{vehicle.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="carsShopApp.vehicle.make">Make</span></dt>
+                <dd>
+                    <span>{{vehicle.make}}</span>
+                </dd>
+                <dt><span jhiTranslate="carsShopApp.vehicle.model">Model</span></dt>
+                <dd>
+                    <span>{{vehicle.model}}</span>
+                </dd>
+                <dt><span jhiTranslate="carsShopApp.vehicle.yearModel">Year Model</span></dt>
+                <dd>
+                    <span>{{vehicle.yearModel}}</span>
+                </dd>
+                <dt><span jhiTranslate="carsShopApp.vehicle.price">Price</span></dt>
+                <dd>
+                    <span>{{vehicle.price}}</span>
+                </dd>
+                <dt><span jhiTranslate="carsShopApp.vehicle.licensed">Licensed</span></dt>
+                <dd>
+                    <span>{{vehicle.licensed}}</span>
+                </dd>
+                <dt><span jhiTranslate="carsShopApp.vehicle.dateAdded">Date Added</span></dt>
+                <dd>
+                    <span>{{vehicle.dateAdded}}</span>
+                </dd>
+                <dt><span jhiTranslate="carsShopApp.vehicle.location">Location</span></dt>
+                <dd>
+                    <div *ngIf="vehicle.location">
+                        <a [routerLink]="['/location', vehicle.location?.id, 'view']">{{vehicle.location?.name}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="carsShopApp.vehicle.warehouse">Warehouse</span></dt>
+                <dd>
+                    <div *ngIf="vehicle.warehouse">
+                        <a [routerLink]="['/warehouse', vehicle.warehouse?.id, 'view']">{{vehicle.warehouse?.name}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/vehicle', vehicle.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
