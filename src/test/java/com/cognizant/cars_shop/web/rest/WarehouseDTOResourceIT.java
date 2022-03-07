@@ -2,6 +2,7 @@ package com.cognizant.cars_shop.web.rest;
 
 import com.cognizant.cars_shop.CarsShopApp;
 import com.cognizant.cars_shop.domain.Warehouse;
+import com.cognizant.cars_shop.repository.VehicleRepository;
 import com.cognizant.cars_shop.repository.WarehouseRepository;
 import com.cognizant.cars_shop.web.rest.errors.ExceptionTranslator;
 
@@ -32,7 +33,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link WarehouseResource} REST controller.
  */
 @SpringBootTest(classes = CarsShopApp.class)
-public class WarehouseResourceIT {
+public class WarehouseDTOResourceIT {
 
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
@@ -45,6 +46,9 @@ public class WarehouseResourceIT {
 
     @Autowired
     private WarehouseRepository warehouseRepository;
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -68,7 +72,7 @@ public class WarehouseResourceIT {
     @BeforeEach
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final WarehouseResource warehouseResource = new WarehouseResource(warehouseRepository);
+        final WarehouseResource warehouseResource = new WarehouseResource(warehouseRepository, vehicleRepository);
         this.restWarehouseMockMvc = MockMvcBuilders.standaloneSetup(warehouseResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)
@@ -218,7 +222,7 @@ public class WarehouseResourceIT {
             .andExpect(jsonPath("$.[*].locationLat").value(hasItem(DEFAULT_LOCATION_LAT.intValue())))
             .andExpect(jsonPath("$.[*].locationLong").value(hasItem(DEFAULT_LOCATION_LONG.intValue())));
     }
-    
+
     @Test
     @Transactional
     public void getWarehouse() throws Exception {
@@ -308,5 +312,19 @@ public class WarehouseResourceIT {
         // Validate the database contains one less item
         List<Warehouse> warehouseList = warehouseRepository.findAll();
         assertThat(warehouseList).hasSize(databaseSizeBeforeDelete - 1);
+    }
+
+    @Test
+    @Transactional
+    public void getAllWarehousesForShop() throws Exception {
+        // Initialize the database
+        warehouseRepository.saveAndFlush(warehouse);
+
+        // Get all the warehouseList
+        restWarehouseMockMvc.perform(get("/api/warehouses"))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(jsonPath("$.[*].id").value(hasItem(warehouse.getId().intValue())))
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
 }

@@ -1,7 +1,10 @@
 package com.cognizant.cars_shop.web.rest;
 
 import com.cognizant.cars_shop.domain.Warehouse;
+import com.cognizant.cars_shop.repository.VehicleRepository;
 import com.cognizant.cars_shop.repository.WarehouseRepository;
+import com.cognizant.cars_shop.service.dto.WarehouseDTO;
+import com.cognizant.cars_shop.util.WarehouseUtil;
 import com.cognizant.cars_shop.web.rest.errors.BadRequestAlertException;
 
 import io.github.jhipster.web.util.HeaderUtil;
@@ -10,7 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional; 
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -36,9 +39,11 @@ public class WarehouseResource {
     private String applicationName;
 
     private final WarehouseRepository warehouseRepository;
+    private final VehicleRepository vehicleRepository;
 
-    public WarehouseResource(WarehouseRepository warehouseRepository) {
+    public WarehouseResource(WarehouseRepository warehouseRepository, VehicleRepository vehicleRepository) {
         this.warehouseRepository = warehouseRepository;
+        this.vehicleRepository = vehicleRepository;
     }
 
     /**
@@ -117,5 +122,17 @@ public class WarehouseResource {
         log.debug("REST request to delete Warehouse : {}", id);
         warehouseRepository.deleteById(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * {@code GET  /warehousesForShop} : get all the warehouses for shop.
+     *
+
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of WarehouseDTO in body.
+     */
+    @GetMapping("/warehousesForShop")
+    public List<WarehouseDTO> getAllWarehousesForShop() {
+        log.debug("REST request to get all Warehouses");
+        return WarehouseUtil.asListWarehouses(vehicleRepository.findAll());
     }
 }

@@ -36,7 +36,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link VehicleResource} REST controller.
  */
 @SpringBootTest(classes = CarsShopApp.class)
-public class VehicleResourceIT {
+public class VehicleDTOResourceIT {
 
     private static final String DEFAULT_MAKE = "AAAAAAAAAA";
     private static final String UPDATED_MAKE = "BBBBBBBBBB";
@@ -117,7 +117,7 @@ public class VehicleResourceIT {
         // Add required entity
         Warehouse warehouse;
         if (TestUtil.findAll(em, Warehouse.class).isEmpty()) {
-            warehouse = WarehouseResourceIT.createEntity(em);
+            warehouse = WarehouseDTOResourceIT.createEntity(em);
             em.persist(warehouse);
             em.flush();
         } else {
@@ -153,7 +153,7 @@ public class VehicleResourceIT {
         // Add required entity
         Warehouse warehouse;
         if (TestUtil.findAll(em, Warehouse.class).isEmpty()) {
-            warehouse = WarehouseResourceIT.createUpdatedEntity(em);
+            warehouse = WarehouseDTOResourceIT.createUpdatedEntity(em);
             em.persist(warehouse);
             em.flush();
         } else {
@@ -337,7 +337,7 @@ public class VehicleResourceIT {
             .andExpect(jsonPath("$.[*].licensed").value(hasItem(DEFAULT_LICENSED.booleanValue())))
             .andExpect(jsonPath("$.[*].dateAdded").value(hasItem(DEFAULT_DATE_ADDED.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getVehicle() throws Exception {
