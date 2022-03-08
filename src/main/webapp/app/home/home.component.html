@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-12">
+        <table>
+            <tbody>
+                <td *ngFor="let warehouse of warehouses" class="warehouse-name">
+                    <button (click)="changeCurrWarehause(warehouse)" class="btn btn-success btn-sm">{{warehouse.name}}</button>
+                </td>
+            </tbody>
+        </table>
+        <div class="row cars">
+            <div class="col-6">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let vehicle of currWarehouse?.cars.vehicles">
+                        <a>{{vehicle.make}} {{vehicle.model}}</a>
+                        <div class="form-check">
+                            <input *ngIf="vehicle.licensed" disabled="true" class="form-check-input" type="checkbox" checked value="" id="flexCheckDefault">
+                            <input *ngIf="!vehicle.licensed" disabled="true" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Licensed
+                            </label>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

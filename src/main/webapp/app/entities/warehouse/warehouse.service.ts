@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IWarehouse } from 'app/shared/model/warehouse.model';
+import { IWarehouseDTO } from 'app/shared/model/warehouseDTO.model';
 
 type EntityResponseType = HttpResponse<IWarehouse>;
 type EntityArrayResponseType = HttpResponse<IWarehouse[]>;
@@ -30,6 +31,11 @@ export class WarehouseService {
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http.get<IWarehouse[]>(this.resourceUrl, { params: options, observe: 'response' });
+  }
+
+  getAllForShop(req?: any): Observable<EntityArrayResponseType> {
+    const options = createRequestOption(req);
+    return this.http.get<IWarehouseDTO[]>(this.resourceUrl + '/forShop', { params: options, observe: 'response' });
   }
 
   delete(id: number): Observable<HttpResponse<{}>> {

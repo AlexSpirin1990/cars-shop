@@ -130,7 +130,7 @@ public class WarehouseResource {
 
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of WarehouseDTO in body.
      */
-    @GetMapping("/warehousesForShop")
+    @GetMapping("/warehouses/forShop")
     public List<WarehouseDTO> getAllWarehousesForShop() {
         log.debug("REST request to get all Warehouses");
         return WarehouseUtil.asListWarehouses(vehicleRepository.findAll());

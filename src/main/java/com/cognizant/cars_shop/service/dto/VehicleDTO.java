@@ -22,7 +22,6 @@ public class VehicleDTO {
     @Size(min = 1)
     private final String model;
 
-
     @JsonProperty("year_model")
     @NotNull
     private final Integer yearModel;
