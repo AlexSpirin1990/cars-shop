@@ -3,15 +3,15 @@
         <table>
             <tbody>
                 <td *ngFor="let warehouse of warehouses" class="warehouse-name">
-                    <button (click)="changeCurrWarehause(warehouse)" class="btn btn-success btn-sm">{{warehouse.name}}</button>
+                    <button [ngClass]="currWarehouse && currWarehouse._id === warehouse._id ? 'btn-success' : 'btn-info'" (click)="changeCurrWarehause(warehouse)" class="btn btn-sm">{{warehouse.name}}</button>
                 </td>
             </tbody>
         </table>
         <div class="row cars">
             <div class="col-6">
                 <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let vehicle of currWarehouse?.cars.vehicles">
-                        <a>{{vehicle.make}} {{vehicle.model}}</a>
+                    <li (click)="changeCurrVehicle(vehicle)" [ngClass]="{'selected-vehicle': currVehicle && currVehicle._id === vehicle._id, 'cursor-pointer' : vehicle.licensed}" class="list-group-item" *ngFor="let vehicle of currWarehouse?.cars.vehicles">
+                        <div style="font-weight: bold">{{vehicle.make}} {{vehicle.model}}</div>
                         <div class="form-check">
                             <input *ngIf="vehicle.licensed" disabled="true" class="form-check-input" type="checkbox" checked value="" id="flexCheckDefault">
                             <input *ngIf="!vehicle.licensed" disabled="true" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
@@ -21,6 +21,13 @@
                         </div>
 
                     </li>
+                </ul>
+            </div>
+            <div *ngIf="currVehicle" class="col-6 selected-car-info">
+                <ul>
+                    <li><span style="font-weight: bold">Location:</span> {{currWarehouse.cars.location}}</li>
+                    <li><span style="font-weight: bold">Year:</span> {{currVehicle.year_model}}</li>
+                    <li><span style="font-weight: bold">Price:</span> {{currVehicle.price}}</li>
                 </ul>
             </div>
         </div>

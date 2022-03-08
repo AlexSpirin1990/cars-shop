@@ -6,6 +6,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 import { WarehouseService } from 'app/entities/warehouse/warehouse.service';
 import { WarehouseDTO } from 'app/shared/model/warehouseDTO.model';
+import { VehicleDTO } from 'app/shared/model/vehicleDTO.model';
 
 @Component({
   selector: 'jhi-home',
@@ -17,6 +18,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   authSubscription?: Subscription;
   warehouses?: WarehouseDTO[];
   currWarehouse?: WarehouseDTO;
+  currVehicle?: VehicleDTO;
 
   constructor(
     private accountService: AccountService,
@@ -51,5 +53,13 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   changeCurrWarehause(warehouse: WarehouseDTO): void {
     this.currWarehouse = warehouse;
+    this.currVehicle = undefined;
+  }
+
+  changeCurrVehicle(vehicle: VehicleDTO): void {
+    if (!vehicle.licensed) {
+      return;
+    }
+    this.currVehicle = vehicle;
   }
 }

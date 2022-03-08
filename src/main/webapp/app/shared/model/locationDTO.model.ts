@@ -1,5 +1,3 @@
-import { IWarehouseDTO } from 'app/shared/model/warehouseDTO.model';
-
 export interface ILocationDTO {
   lat?: number;
   long?: number;
