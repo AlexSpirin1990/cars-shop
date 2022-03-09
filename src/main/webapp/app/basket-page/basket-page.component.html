@@ -1,0 +1,22 @@
+<div *ngIf="!basketService.vehicles.value.length;else cars_content">
+    No cars in the basket.
+</div>
+<ng-template #cars_content>
+    <div class="row cars">
+        <div class="col-6">
+            <ul class="list-group">
+                <li class="list-group-item" *ngFor="let vehicle of basketService.vehicles.value">
+                    <div style="font-weight: bold">{{vehicle.make}} {{vehicle.model}}</div>
+                    <div>
+                        Price: {{vehicle.price}}
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            Total price: {{getTotalPrice()}}
+        </div>
+    </div>
+</ng-template>

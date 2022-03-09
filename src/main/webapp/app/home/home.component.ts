@@ -7,6 +7,8 @@ import { Account } from 'app/core/user/account.model';
 import { WarehouseService } from 'app/entities/warehouse/warehouse.service';
 import { WarehouseDTO } from 'app/shared/model/warehouseDTO.model';
 import { VehicleDTO } from 'app/shared/model/vehicleDTO.model';
+import { BasketService } from 'app/layouts/navbar/basket/basket.service';
+import { vehicleRoute } from 'app/entities/vehicle/vehicle.route';
 
 @Component({
   selector: 'jhi-home',
@@ -23,7 +25,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(
     private accountService: AccountService,
     private loginModalService: LoginModalService,
-    private warehouseService: WarehouseService
+    private warehouseService: WarehouseService,
+    private basketService: BasketService
   ) {}
 
   ngOnInit(): void {
@@ -61,5 +64,20 @@ export class HomeComponent implements OnInit, OnDestroy {
       return;
     }
     this.currVehicle = vehicle;
+  }
+
+  getTextForAddOrRemoveBtn(): string {
+    if (this.basketService.vehicles.value.filter(vehicle => this.currVehicle && vehicle._id === this.currVehicle._id).length > 0) {
+      return 'Remove';
+    }
+    return 'Add';
+  }
+
+  addOrRemovedCar(): void {
+    if (this.basketService.vehicles.value.filter(vehicle => this.currVehicle && vehicle._id === this.currVehicle._id).length > 0) {
+      this.basketService.itemAddedOrRemoved.next({ added: false, vehicle: this.currVehicle! });
+    } else {
+      this.basketService.itemAddedOrRemoved.next({ added: true, vehicle: this.currVehicle! });
+    }
   }
 }

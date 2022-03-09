@@ -14,6 +14,8 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PageRibbonComponent } from './layouts/profiles/page-ribbon.component';
 import { ActiveMenuDirective } from './layouts/navbar/active-menu.directive';
 import { ErrorComponent } from './layouts/error/error.component';
+import { BasketComponent } from 'app/layouts/navbar/basket/basket.component';
+import { BasketPageModule } from 'app/basket-page/basket-page.module';
 
 @NgModule({
   imports: [
@@ -23,9 +25,18 @@ import { ErrorComponent } from './layouts/error/error.component';
     CarsShopHomeModule,
     // jhipster-needle-angular-add-module JHipster will add new module here
     CarsShopEntityModule,
+    BasketPageModule,
     CarsShopAppRoutingModule
   ],
-  declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+  declarations: [
+    MainComponent,
+    NavbarComponent,
+    ErrorComponent,
+    PageRibbonComponent,
+    ActiveMenuDirective,
+    FooterComponent,
+    BasketComponent
+  ],
   bootstrap: [MainComponent]
 })
 export class CarsShopAppModule {}

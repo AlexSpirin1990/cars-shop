@@ -12,12 +12,8 @@
                 <ul class="list-group">
                     <li (click)="changeCurrVehicle(vehicle)" [ngClass]="{'selected-vehicle': currVehicle && currVehicle._id === vehicle._id, 'cursor-pointer' : vehicle.licensed}" class="list-group-item" *ngFor="let vehicle of currWarehouse?.cars.vehicles">
                         <div style="font-weight: bold">{{vehicle.make}} {{vehicle.model}}</div>
-                        <div class="form-check">
-                            <input *ngIf="vehicle.licensed" disabled="true" class="form-check-input" type="checkbox" checked value="" id="flexCheckDefault">
-                            <input *ngIf="!vehicle.licensed" disabled="true" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Licensed
-                            </label>
+                        <div>
+                            {{vehicle.licensed ? 'Licensed' : 'Not licensed'}}
                         </div>
 
                     </li>
@@ -29,6 +25,7 @@
                     <li><span style="font-weight: bold">Year:</span> {{currVehicle.year_model}}</li>
                     <li><span style="font-weight: bold">Price:</span> {{currVehicle.price}}</li>
                 </ul>
+                <button (click)="addOrRemovedCar()" class="btn btn-success btn-sm">{{getTextForAddOrRemoveBtn()}}</button>
             </div>
         </div>
     </div>

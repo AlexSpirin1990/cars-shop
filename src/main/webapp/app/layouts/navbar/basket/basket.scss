@@ -1,0 +1,14 @@
+.basket-img {
+  height: 45px;
+  width: 45px;
+  display: inline-block;
+  vertical-align: middle;
+  background-size: contain;
+  background: url('../../../../content/images/basket-img.svg') no-repeat center center;
+  cursor: pointer;
+}
+
+.cars-count {
+  position: absolute;
+  font-size: 27px;
+}
