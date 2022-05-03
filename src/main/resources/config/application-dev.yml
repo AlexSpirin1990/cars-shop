@@ -20,6 +20,8 @@ logging:
     com.cognizant.cars_shop: DEBUG
 
 spring:
+  config:
+    use-legacy-processing: true
   profiles:
     active: dev
     include:

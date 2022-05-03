@@ -22,6 +22,7 @@ import java.net.URISyntaxException;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * REST controller for managing {@link com.cognizant.cars_shop.domain.Warehouse}.
@@ -134,5 +135,21 @@ public class WarehouseResource {
     public List<WarehouseDTO> getAllWarehousesForShop() {
         log.debug("REST request to get all Warehouses");
         return WarehouseUtil.asListWarehouses(vehicleRepository.findAll());
+    }
+
+    /**
+     * {@code POST  /warehouses} : Create a new warehouse.
+     *
+     * @param warehouses the warehouses to create.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new warehouses.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @PostMapping("/warehouses/batch")
+    public ResponseEntity<List<Warehouse>> createWarehouses(@Valid @RequestBody List<Warehouse> warehouses) throws URISyntaxException {
+        log.debug("REST request to save Warehouses : {}", warehouses);
+        List<Warehouse> result = warehouseRepository.saveAll(warehouses);
+        return ResponseEntity.created(new URI("/api/warehouses/batch/" + result.stream().map(Warehouse::getId).collect(Collectors.toList())))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.stream().map(Warehouse::getId).collect(Collectors.toList()).toString()))
+            .body(result);
     }
 }
